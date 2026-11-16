@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Agendamentos | Pediatria</title>
+    <style>
+      body {
+        font: 16px Arial;
+        background: #f4f7fb;
+        color: #192b43;
+        margin: 0;
+      }
+      header,
+      main {
+        max-width: 1100px;
+        margin: auto;
+        padding: 20px;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        background: white;
+      }
+      nav a {
+        margin-right: 14px;
+      }
+      .usuario-logado {
+        margin-right: 14px;
+        font-weight: 600;
+      }
+      table {
+        width: 100%;
+        background: white;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+      }
+      form {
+        display: inline;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <strong>Pediatria · Gestão</strong>
+      <nav>
+        <span class="usuario-logado">Olá, <%= usuario.nome %></span>
+        <a href="/agendamentos">Agendamentos</a><a href="/criancas">Crianças</a
+        ><a href="/responsaveis">Responsáveis</a>
+        <form action="/logout" method="post"><button>Sair</button></form>
+      </nav>
+    </header>
+    <main>
+      <h1>Agendamentos</h1>
+      <p><a href="/agendamentos/novo">Novo agendamento</a></p>
+      <table>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Hora</th>
+            <th>Motivo</th>
+            <th>Criança</th>
+            <th>Responsável</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% agendamentos.forEach(a=>{ %>
+          <tr>
+            <td>
+              <%= new Date(a.data_agendada).toLocaleDateString('pt-BR',{timeZone:'UTC'}) %>
+            </td>
+            <td><%= String(a.hora_agendada).slice(0,5) %></td>
+            <td><%= a.motivo %></td>
+            <td><%= a.nome_da_crianca %></td>
+            <td><%= a.nome_do_responsavel %></td>
+            <td>
+              <a href="/agendamentos/editar/<%= a.id_agendamento %>">Editar</a>
+              <form
+                action="/agendamentos/excluir/<%= a.id_agendamento %>"
+                method="post"
+                onsubmit="return confirm('Excluir este agendamento?');"
+              >
+                <button>Excluir</button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>

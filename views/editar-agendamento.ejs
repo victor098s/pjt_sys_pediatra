@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Editar agendamento | Pediatria</title>
+    <style>
+      body {
+        font: 16px Arial;
+        background: #f4f7fb;
+        color: #192b43;
+      }
+      .wrap {
+        max-width: 700px;
+        margin: 40px auto;
+        background: white;
+        padding: 28px;
+        border-radius: 12px;
+      }
+      label {
+        display: block;
+        margin: 14px 0;
+      }
+      input,
+      select {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <a href="/agendamentos">← Agendamentos</a>
+      <h1>Editar agendamento</h1>
+      <% if (erro) { %>
+      <p role="alert"><%= erro %></p>
+      <% } %>
+      <form action="/agendamentos/editar/<%= agendamento.id %>" method="post">
+        <label
+          >Data<input
+            name="data_agendada"
+            type="date"
+            value="<%= new Date(agendamento.data_agendada).toISOString().slice(0, 10) %>"
+            required
+        /></label>
+        <label
+          >Hora<input
+            name="hora_agendada"
+            type="time"
+            value="<%= String(agendamento.hora_agendada).slice(0, 5) %>"
+            required
+        /></label>
+        <label
+          >Motivo<input
+            name="motivo"
+            maxlength="120"
+            value="<%= agendamento.motivo %>"
+            required
+        /></label>
+        <label
+          >Criança
+          <select name="crianca" required>
+            <% criancas.forEach((c) => { %>
+            <% if (Number(agendamento.crianca) === Number(c.id)) { %>
+            <option value="<%= c.id %>" selected><%= c.nome %></option>
+            <% } else { %>
+            <option value="<%= c.id %>"><%= c.nome %></option>
+            <% } %>
+            <% }) %>
+          </select>
+        </label>
+        <label
+          >Responsável
+          <select name="responsavel" required>
+            <% responsaveis.forEach((r) => { %>
+            <% if (Number(agendamento.responsavel) === Number(r.id)) { %>
+            <option value="<%= r.id %>" selected><%= r.nome %></option>
+            <% } else { %>
+            <option value="<%= r.id %>"><%= r.nome %></option>
+            <% } %>
+            <% }) %>
+          </select>
+        </label>
+        <button type="submit">Salvar alterações</button>
+      </form>
+    </main>
+  </body>
+</html>

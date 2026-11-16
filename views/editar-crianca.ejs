@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Editar criança | Pediatria</title>
+    <style>
+      body {
+        font: 16px Arial;
+        background: #f4f7fb;
+        color: #192b43;
+      }
+      .wrap {
+        max-width: 700px;
+        margin: 40px auto;
+        background: white;
+        padding: 28px;
+        border-radius: 12px;
+      }
+      label {
+        display: block;
+        margin: 14px 0;
+      }
+      input,
+      select {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <a href="/criancas">← Crianças</a>
+      <h1>Editar criança</h1>
+      <% if (erro) { %>
+      <p role="alert"><%= erro %></p>
+      <% } %>
+      <form action="/criancas/editar/<%= crianca.id %>" method="post">
+        <label
+          >Nome<input
+            name="nome"
+            maxlength="100"
+            value="<%= crianca.nome %>"
+            required
+        /></label>
+        <label
+          >Idade<input
+            name="idade"
+            type="number"
+            min="0"
+            value="<%= crianca.idade %>"
+            required
+        /></label>
+        <label
+          >Responsável
+          <select name="responsavel" required>
+            <% responsaveis.forEach((r) => { %>
+            <% if (Number(crianca.responsavel) === Number(r.id)) { %>
+            <option value="<%= r.id %>" selected><%= r.nome %></option>
+            <% } else { %>
+            <option value="<%= r.id %>"><%= r.nome %></option>
+            <% } %>
+            <% }) %>
+          </select>
+        </label>
+        <button type="submit">Salvar alterações</button>
+      </form>
+    </main>
+  </body>
+</html>

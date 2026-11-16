@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Responsáveis | Pediatria</title>
+    <style>
+      body {
+        font: 16px Arial;
+        background: #f4f7fb;
+        color: #192b43;
+        margin: 0;
+      }
+      header,
+      main {
+        max-width: 1000px;
+        margin: auto;
+        padding: 20px;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        background: white;
+      }
+      a,
+      button {
+        color: #147a83;
+      }
+      table {
+        width: 100%;
+        background: white;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+      }
+      form {
+        display: inline;
+      }
+      button {
+        cursor: pointer;
+      }
+      nav a {
+        margin-right: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <strong>Pediatria · Gestão</strong>
+      <nav>
+        <a href="/agendamentos">Agendamentos</a><a href="/criancas">Crianças</a
+        ><a href="/responsaveis">Responsáveis</a>
+        <form action="/logout" method="post"><button>Sair</button></form>
+      </nav>
+    </header>
+    <main>
+      <h1>Responsáveis</h1>
+      <p><a href="/responsaveis/novo">Cadastrar responsável</a></p>
+      <% if (erro) { %>
+      <p><%= erro %></p>
+      <% } %>
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Telefone</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% responsaveis.forEach(r => { %>
+          <tr>
+            <td><%= r.nome %></td>
+            <td><%= r.email %></td>
+            <td><%= r.telefone %></td>
+            <td>
+              <a href="/responsaveis/editar/<%= r.id %>">Editar</a>
+              <form
+                action="/responsaveis/excluir/<%= r.id %>"
+                method="post"
+                onsubmit="return confirm('Excluir este responsável?');"
+              >
+                <button>Excluir</button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>

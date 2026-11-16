@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Nova criança | Pediatria</title>
+    <style>
+      body {
+        font: 16px Arial;
+        background: #f4f7fb;
+        color: #192b43;
+      }
+      .wrap {
+        max-width: 700px;
+        margin: 40px auto;
+        background: white;
+        padding: 28px;
+        border-radius: 12px;
+      }
+      label {
+        display: block;
+        margin: 14px 0;
+      }
+      input,
+      select {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <a href="/criancas">← Crianças</a>
+      <h1>Cadastrar criança</h1>
+      <% if(erro){ %>
+      <p role="alert"><%= erro %></p>
+      <% } %>
+      <form action="/criancas/novo" method="post">
+        <label>Nome<input name="nome" maxlength="100" required /></label
+        ><label
+          >Idade<input name="idade" type="number" min="0" required /></label
+        ><label
+          >Responsável<select name="responsavel" required>
+            <option value="">Selecione</option>
+            <% responsaveis.forEach(r=>{ %>
+            <option value="<%= r.id %>"><%= r.nome %></option>
+            <% }) %>
+          </select></label
+        ><button type="submit">Cadastrar</button>
+      </form>
+    </main>
+  </body>
+</html>

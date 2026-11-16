@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Login | Pediatria</title>
+    <style>
+      body {
+        font: 16px Arial;
+        background: #f4f7fb;
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        margin: 0;
+        color: #192b43;
+      }
+      .card {
+        background: white;
+        padding: 32px;
+        border-radius: 12px;
+        width: min(340px, calc(100% - 40px));
+        box-shadow: 0 4px 16px #0001;
+      }
+      label {
+        display: block;
+        margin: 16px 0 6px;
+      }
+      input {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 11px;
+      }
+      button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 12px;
+        background: #147a83;
+        color: white;
+        border: 0;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .error {
+        color: #9b2222;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <h1>Acesso ao sistema</h1>
+      <p>Entre com seu e-mail e senha.</p>
+      <% if(erro){ %>
+      <p class="error" role="alert"><%= erro %></p>
+      <% } %>
+      <form action="/login" method="post">
+        <label for="email">E-mail</label
+        ><input
+          id="email"
+          name="email"
+          type="email"
+          autocomplete="username"
+          maxlength="100"
+          placeholder="nome@exemplo.com"
+          required
+        /><label for="senha">Senha</label
+        ><input
+          id="senha"
+          name="senha"
+          type="password"
+          autocomplete="current-password"
+          required
+        /><button type="submit">Entrar</button>
+      </form>
+    </main>
+  </body>
+</html>

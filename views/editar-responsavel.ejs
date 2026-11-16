@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Editar responsável | Pediatria</title>
+    <style>
+      body {
+        font: 16px Arial;
+        background: #f4f7fb;
+        color: #192b43;
+      }
+      .wrap {
+        max-width: 700px;
+        margin: 40px auto;
+        background: white;
+        padding: 28px;
+        border-radius: 12px;
+      }
+      label {
+        display: block;
+        margin: 14px 0;
+      }
+      input {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+        margin-top: 5px;
+      }
+      button {
+        padding: 10px 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <a href="/responsaveis">← Responsáveis</a>
+      <h1>Editar responsável</h1>
+      <% if(erro){ %>
+      <p role="alert"><%= erro %></p>
+      <% } %>
+      <form action="/responsaveis/editar/<%= responsavel.id %>" method="post">
+        <label
+          >Nome<input
+            name="nome"
+            maxlength="100"
+            value="<%= responsavel.nome %>"
+            required /></label
+        ><label
+          >E-mail<input
+            name="email"
+            type="email"
+            maxlength="100"
+            value="<%= responsavel.email %>"
+            required /></label
+        ><label
+          >Telefone<input
+            name="telefone"
+            maxlength="15"
+            value="<%= responsavel.telefone %>"
+            required
+        /></label>
+        <p>O CPF permanece protegido e não é exibido.</p>
+        <button type="submit">Salvar alterações</button>
+      </form>
+    </main>
+  </body>
+</html>

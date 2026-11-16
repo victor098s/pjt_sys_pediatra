@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Novo responsável | Pediatria</title>
+    <style>
+      body {
+        font: 16px Arial;
+        background: #f4f7fb;
+        color: #192b43;
+      }
+      .wrap {
+        max-width: 700px;
+        margin: 40px auto;
+        background: white;
+        padding: 28px;
+        border-radius: 12px;
+      }
+      label {
+        display: block;
+        margin: 14px 0;
+      }
+      input {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+        margin-top: 5px;
+      }
+      button {
+        padding: 10px 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <a href="/responsaveis">← Responsáveis</a>
+      <h1>Novo responsável</h1>
+      <% if(erro){ %>
+      <p role="alert"><%= erro %></p>
+      <% } %>
+      <form action="/responsaveis/novo" method="post">
+        <label>Nome<input name="nome" maxlength="100" required /></label
+        ><label
+          >CPF<input
+            name="cpf"
+            inputmode="numeric"
+            autocomplete="off"
+            maxlength="14"
+            placeholder="000.000.000-00"
+            required /></label
+        ><label
+          >E-mail<input
+            name="email"
+            type="email"
+            maxlength="100"
+            required /></label
+        ><label>Telefone<input name="telefone" maxlength="15" required /></label
+        ><button type="submit">Cadastrar</button>
+      </form>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Crianças | Pediatria</title>
+    <style>
+      body {
+        font: 16px Arial;
+        background: #f4f7fb;
+        color: #192b43;
+        margin: 0;
+      }
+      header,
+      main {
+        max-width: 1000px;
+        margin: auto;
+        padding: 20px;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        background: white;
+      }
+      nav a {
+        margin-right: 14px;
+      }
+      table {
+        width: 100%;
+        background: white;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 12px;
+        border-bottom: 1px solid #ddd;
+      }
+      form {
+        display: inline;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <strong>Pediatria · Gestão</strong>
+      <nav>
+        <a href="/agendamentos">Agendamentos</a><a href="/criancas">Crianças</a
+        ><a href="/responsaveis">Responsáveis</a>
+        <form action="/logout" method="post"><button>Sair</button></form>
+      </nav>
+    </header>
+    <main>
+      <h1>Crianças</h1>
+      <p><a href="/criancas/novo">Cadastrar criança</a></p>
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Responsável</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% criancas.forEach(c=>{ %>
+          <tr>
+            <td><%= c.nome %></td>
+            <td><%= c.idade %></td>
+            <td><%= c.nome_responsavel %></td>
+            <td>
+              <a href="/criancas/editar/<%= c.id %>">Editar</a>
+              <form
+                action="/criancas/excluir/<%= c.id %>"
+                method="post"
+                onsubmit="return confirm('Excluir esta criança?');"
+              >
+                <button>Excluir</button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>
