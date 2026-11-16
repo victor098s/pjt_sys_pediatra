@@ -190,10 +190,10 @@
       <a
         class="brand"
         href="/agendamentos"
-        aria-label="Pediatria, p?gina inicial"
+        aria-label="Pediatria, página inicial"
       >
-        <span class="brand-mark" aria-hidden="true">+</span>
-        <span><strong>Pediatria</strong><small>Gest?o cl?nica</small></span>
+        <span class="brand-mark" aria-hidden="true">🩺</span>
+        <span>Pediatria</span>
       </a>
       <nav class="main-nav" aria-label="Navega??o principal">
         <a
@@ -204,17 +204,17 @@
         <a
           class="<%= currentPath.startsWith('/criancas') ? 'active' : '' %>"
           href="/criancas"
-          >Crian?as</a
+          >Crianças</a
         >
         <a
           class="<%= currentPath.startsWith('/responsaveis') ? 'active' : '' %>"
           href="/responsaveis"
-          >Respons?veis</a
+          >Responsáveis</a
         >
       </nav>
       <div class="account-menu">
         <span class="welcome"
-          >Ol?, <strong><%= usuario ? usuario.nome : '' %></strong></span
+          >Olá, <strong><%= usuario ? usuario.nome : '' %></strong></span
         >
         <form action="/logout" method="post">
           <button class="button-quiet" type="submit">Sair</button>
