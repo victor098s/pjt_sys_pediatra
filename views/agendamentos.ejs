@@ -4,56 +4,237 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Agendamentos | Pediatria</title>
+
     <style>
+      * {
+        box-sizing: border-box;
+      }
       body {
-        font: 16px Arial;
-        background: #f4f7fb;
-        color: #192b43;
+        margin: 0;
+        background: #f1f6fb;
+        color: #243b53;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      a {
+        color: #216eae;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .app-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 16px 5%;
+        background: #174a78;
+        color: white;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: white;
+      }
+      .brand:hover {
+        color: white;
+        text-decoration: none;
+      }
+      .brand strong,
+      .brand small {
+        display: block;
+        color: white;
+      }
+      .brand small {
+        color: #d4e7f7;
+        font-size: 12px;
+      }
+      .brand-mark {
+        display: block;
+        padding: 5px 12px;
+        border: 1px solid #ffffff70;
+        border-radius: 8px;
+        color: white;
+        font-size: 24px;
+      }
+      .main-nav {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .main-nav a {
+        color: white;
+      }
+      .main-nav a.active {
+        font-weight: bold;
+        text-decoration: underline;
+      }
+      .account-menu {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .welcome {
+        color: #e3f0fa;
+        white-space: nowrap;
+      }
+      .welcome strong {
+        color: white;
+      }
+      .account-menu form {
         margin: 0;
       }
-      header,
+      button {
+        padding: 10px 16px;
+        border: 0;
+        border-radius: 6px;
+        background: #216eae;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      button:hover {
+        background: #174a78;
+      }
+      button.button-quiet {
+        padding: 8px 13px;
+        border: 1px solid #ffffff80;
+        background: transparent;
+      }
+      [role="alert"] {
+        margin: 16px 0;
+        padding: 12px;
+        border: 1px solid #e8b8c1;
+        border-radius: 6px;
+        background: #fff1f3;
+        color: #913548;
+      }
+      @media (max-width: 700px) {
+        .app-header {
+          flex-wrap: wrap;
+          padding: 14px 18px;
+        }
+        .main-nav {
+          order: 3;
+          width: 100%;
+          flex-wrap: wrap;
+          gap: 12px;
+        }
+        .account-menu {
+          margin-left: auto;
+        }
+      }
+
       main {
-        max-width: 1100px;
-        margin: auto;
-        padding: 20px;
+        max-width: 1120px;
+        margin: 36px auto;
+        padding: 0 22px;
       }
-      header {
-        display: flex;
-        justify-content: space-between;
-        background: white;
+      h1 {
+        margin: 0 0 8px;
+        color: #123b63;
+        font-size: 30px;
       }
-      nav a {
-        margin-right: 14px;
+      main > p {
+        margin: 12px 0 22px;
       }
-      .usuario-logado {
-        margin-right: 14px;
-        font-weight: 600;
+      main > p > a {
+        display: inline-block;
+        padding: 10px 15px;
+        border-radius: 6px;
+        background: #216eae;
+        color: white;
+      }
+      main > p > a:hover {
+        background: #174a78;
+        text-decoration: none;
       }
       table {
         width: 100%;
-        background: white;
         border-collapse: collapse;
+        background: white;
       }
-      th,
-      td {
+      th {
+        padding: 14px 16px;
+        background: #dcecf8;
+        color: #174a78;
         text-align: left;
-        padding: 12px;
-        border-bottom: 1px solid #ddd;
       }
-      form {
-        display: inline;
+      td {
+        padding: 14px 16px;
+        border-bottom: 1px solid #d9e3ec;
+        vertical-align: middle;
+      }
+      tbody tr:hover {
+        background: #f7fbfe;
+      }
+      td form {
+        display: inline-block;
+        margin: 0 0 0 10px;
+      }
+      td form button {
+        padding: 7px 11px;
+        background: #e7f1f9;
+        color: #174a78;
+      }
+      td form button:hover {
+        background: #d5e8f7;
+      }
+      @media (max-width: 700px) {
+        main {
+          margin: 24px auto;
+          padding: 0 14px;
+        }
+        table {
+          display: block;
+          overflow-x: auto;
+          white-space: nowrap;
+        }
+        th,
+        td {
+          padding: 11px 12px;
+        }
       }
     </style>
   </head>
   <body>
-    <header>
-      <strong>Pediatria · Gestão</strong>
-      <nav>
-        <span class="usuario-logado">Olá, <%= usuario.nome %></span>
-        <a href="/agendamentos">Agendamentos</a><a href="/criancas">Crianças</a
-        ><a href="/responsaveis">Responsáveis</a>
-        <form action="/logout" method="post"><button>Sair</button></form>
+    <header class="app-header">
+      <a
+        class="brand"
+        href="/agendamentos"
+        aria-label="Pediatria, p?gina inicial"
+      >
+        <span class="brand-mark" aria-hidden="true">🩺</span>
+        <span>Pediatria</span>
+      </a>
+      <nav class="main-nav" aria-label="Navega??o principal">
+        <a
+          class="<%= currentPath.startsWith('/agendamentos') ? 'active' : '' %>"
+          href="/agendamentos"
+          >Agendamentos</a
+        >
+        <a
+          class="<%= currentPath.startsWith('/criancas') ? 'active' : '' %>"
+          href="/criancas"
+          >Crianças</a
+        >
+        <a
+          class="<%= currentPath.startsWith('/responsaveis') ? 'active' : '' %>"
+          href="/responsaveis"
+          >Responsáveis</a
+        >
       </nav>
+      <div class="account-menu">
+        <span class="welcome"
+          >Olá, <strong><%= usuario ? usuario.nome : '' %></strong></span
+        >
+        <form action="/logout" method="post">
+          <button class="button-quiet" type="submit">Sair</button>
+        </form>
+      </div>
     </header>
     <main>
       <h1>Agendamentos</h1>

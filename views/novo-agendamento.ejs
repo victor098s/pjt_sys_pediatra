@@ -4,34 +4,223 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Novo agendamento | Pediatria</title>
+
     <style>
-      body {
-        font: 16px Arial;
-        background: #f4f7fb;
-        color: #192b43;
+      * {
+        box-sizing: border-box;
       }
-      .wrap {
-        max-width: 700px;
-        margin: 40px auto;
-        background: white;
+      body {
+        margin: 0;
+        background: #f1f6fb;
+        color: #243b53;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      a {
+        color: #216eae;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .app-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 16px 5%;
+        background: #174a78;
+        color: white;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: white;
+      }
+      .brand:hover {
+        color: white;
+        text-decoration: none;
+      }
+      .brand strong,
+      .brand small {
+        display: block;
+        color: white;
+      }
+      .brand small {
+        color: #d4e7f7;
+        font-size: 12px;
+      }
+      .brand-mark {
+        display: block;
+        padding: 5px 12px;
+        border: 1px solid #ffffff70;
+        border-radius: 8px;
+        color: white;
+        font-size: 24px;
+      }
+      .main-nav {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .main-nav a {
+        color: white;
+      }
+      .main-nav a.active {
+        font-weight: bold;
+        text-decoration: underline;
+      }
+      .account-menu {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .welcome {
+        color: #e3f0fa;
+        white-space: nowrap;
+      }
+      .welcome strong {
+        color: white;
+      }
+      .account-menu form {
+        margin: 0;
+      }
+      button {
+        padding: 10px 16px;
+        border: 0;
+        border-radius: 6px;
+        background: #216eae;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      button:hover {
+        background: #174a78;
+      }
+      button.button-quiet {
+        padding: 8px 13px;
+        border: 1px solid #ffffff80;
+        background: transparent;
+      }
+      [role="alert"] {
+        margin: 16px 0;
+        padding: 12px;
+        border: 1px solid #e8b8c1;
+        border-radius: 6px;
+        background: #fff1f3;
+        color: #913548;
+      }
+      @media (max-width: 700px) {
+        .app-header {
+          flex-wrap: wrap;
+          padding: 14px 18px;
+        }
+        .main-nav {
+          order: 3;
+          width: 100%;
+          flex-wrap: wrap;
+          gap: 12px;
+        }
+        .account-menu {
+          margin-left: auto;
+        }
+      }
+
+      main.wrap {
+        max-width: 680px;
+        margin: 36px auto;
         padding: 28px;
-        border-radius: 12px;
+        border: 1px solid #d7e2ec;
+        border-radius: 10px;
+        background: white;
+      }
+      main.wrap > a:first-child {
+        display: inline-block;
+        margin-bottom: 16px;
+      }
+      h1 {
+        margin: 0 0 20px;
+        color: #123b63;
+        font-size: 28px;
+      }
+      main.wrap form {
+        margin: 0;
       }
       label {
         display: block;
-        margin: 14px 0;
+        margin: 16px 0;
+        color: #344f69;
+        font-size: 14px;
+        font-weight: bold;
       }
       input,
-      select {
+      select,
+      textarea {
         display: block;
         width: 100%;
-        box-sizing: border-box;
-        padding: 10px;
-        margin-top: 5px;
+        margin-top: 6px;
+        padding: 10px 12px;
+        border: 1px solid #cbd8e5;
+        border-radius: 6px;
+        background: white;
+        color: #243b53;
+        font: inherit;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: #328bcc;
+        outline: 2px solid #d9edfb;
+      }
+      main.wrap button {
+        margin-top: 6px;
+      }
+      @media (max-width: 700px) {
+        main.wrap {
+          margin: 22px 14px;
+          padding: 22px 18px;
+        }
       }
     </style>
   </head>
   <body>
+    <header class="app-header">
+      <a
+        class="brand"
+        href="/agendamentos"
+        aria-label="Pediatria, p?gina inicial"
+      >
+        <span class="brand-mark" aria-hidden="true">+</span>
+        <span><strong>Pediatria</strong><small>Gest?o cl?nica</small></span>
+      </a>
+      <nav class="main-nav" aria-label="Navega??o principal">
+        <a
+          class="<%= currentPath.startsWith('/agendamentos') ? 'active' : '' %>"
+          href="/agendamentos"
+          >Agendamentos</a
+        >
+        <a
+          class="<%= currentPath.startsWith('/criancas') ? 'active' : '' %>"
+          href="/criancas"
+          >Crian?as</a
+        >
+        <a
+          class="<%= currentPath.startsWith('/responsaveis') ? 'active' : '' %>"
+          href="/responsaveis"
+          >Respons?veis</a
+        >
+      </nav>
+      <div class="account-menu">
+        <span class="welcome"
+          >Ol?, <strong><%= usuario ? usuario.nome : '' %></strong></span
+        >
+        <form action="/logout" method="post">
+          <button class="button-quiet" type="submit">Sair</button>
+        </form>
+      </div>
+    </header>
     <main class="wrap">
       <a href="/agendamentos">← Agendamentos</a>
       <h1>Novo agendamento</h1>

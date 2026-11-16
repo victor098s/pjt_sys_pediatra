@@ -4,44 +4,80 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Login | Pediatria</title>
+
     <style>
-      body {
-        font: 16px Arial;
-        background: #f4f7fb;
-        display: grid;
-        place-items: center;
-        min-height: 100vh;
-        margin: 0;
-        color: #192b43;
+      * {
+        box-sizing: border-box;
       }
-      .card {
-        background: white;
+      body {
+        display: flex;
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 20px;
+        background: #eaf3fb;
+        color: #243b53;
+        font-family: Arial, sans-serif;
+      }
+      main.card {
+        width: 100%;
+        max-width: 400px;
         padding: 32px;
+        border: 1px solid #d5e2ee;
         border-radius: 12px;
-        width: min(340px, calc(100% - 40px));
-        box-shadow: 0 4px 16px #0001;
+        background: white;
+      }
+      h1 {
+        margin: 0 0 8px;
+        color: #123b63;
+        font-size: 28px;
+        text-align: center;
+      }
+      main.card > p {
+        margin: 0 0 22px;
+        color: #627d98;
+        text-align: center;
       }
       label {
         display: block;
-        margin: 16px 0 6px;
+        margin: 16px 0;
+        color: #344f69;
+        font-size: 14px;
+        font-weight: bold;
       }
       input {
-        box-sizing: border-box;
+        display: block;
         width: 100%;
-        padding: 11px;
+        margin-top: 6px;
+        padding: 11px 12px;
+        border: 1px solid #cbd8e5;
+        border-radius: 6px;
+        font: inherit;
+      }
+      input:focus {
+        border-color: #328bcc;
+        outline: 2px solid #d9edfb;
       }
       button {
         width: 100%;
-        padding: 12px;
-        margin-top: 12px;
-        background: #147a83;
-        color: white;
+        margin-top: 8px;
+        padding: 11px;
         border: 0;
         border-radius: 6px;
+        background: #216eae;
+        color: white;
         cursor: pointer;
+        font-size: 15px;
       }
-      .error {
-        color: #9b2222;
+      button:hover {
+        background: #174a78;
+      }
+      [role="alert"] {
+        padding: 10px;
+        border-radius: 6px;
+        background: #fff1f3;
+        color: #913548;
       }
     </style>
   </head>
@@ -68,6 +104,7 @@
           name="senha"
           type="password"
           autocomplete="current-password"
+          placeholder="********"
           required
         /><button type="submit">Entrar</button>
       </form>
